@@ -3,35 +3,31 @@
 <?php
 
 $sql11 = "SELECT count(a_id) as ca_id FROM admin";
-
 $result11 = $conn->query($sql11);
-
 $row11 = $result11->fetch_assoc();
 
 
-
 $sql12 = "SELECT count(nc_id) as cnc_id FROM newcandidate";
-
 $result12 = $conn->query($sql12);
-
 $row12 = $result12->fetch_assoc();
 
 
 
 $sql13 = "SELECT count(m_id) as cco_id FROM member";
-
 $result13 = $conn->query($sql13);
-
 $row13 = $result13->fetch_assoc();
 
 
 $sql15 = "SELECT count(oc_id) as coc_id FROM oldcandidate";
-
 $result15 = $conn->query($sql15);
-
 $row15 = $result15->fetch_assoc();
 
 $candidateall = $row12['cnc_id'] + $row15['coc_id'];
+
+
+$sql16 = "SELECT * FROM sys WHERE s_id = 1";
+$result16 = $conn->query($sql16);
+$row16 = $result16->fetch_assoc();
 
 ?>
 
@@ -141,9 +137,32 @@ $candidateall = $row12['cnc_id'] + $row15['coc_id'];
 
                         </div>
                     </div>
-                </div><!-- End Left side columns -->
+                </div>
 
-                <!-- Right side columns -->
+                <div class="col-lg-12">
+                    <div class="row">
+
+                        <!-- Sales Card -->
+                        <div class="col-12">
+                            <div class="card info-card sales-card">
+
+                                <div class="card-body">
+                                    <h5 class="card-title">ສະ​ຖາ​ນະ​ລະ​ບົບ</h5>
+
+                                    <div class="text-center my-5">
+                                        <?php if ($row16['s_active'] == 1) { ?>
+                                            <a href="a_action?updateactive=<?= $row16['s_id']; ?>&s_active=0" type="button" class="btn btn-success btn-lg">ເປີດໃຊ້​ງານ</a>
+                                        <?php } else { ?>
+                                            <a href="a_action?updateactive=<?= $row16['s_id']; ?>&s_active=1" type="button" class="btn btn-danger btn-lg">ປິດໃຊ້​ງານ</a>
+                                        <?php } ?>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div><!-- End Sales Card -->
+
+                    </div>
+                </div>
 
 
             </div>

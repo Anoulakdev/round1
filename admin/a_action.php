@@ -111,4 +111,31 @@ if (isset($_POST['update'])) {
 	$stmt->close();
 	$conn->close();
 }
+
+if (isset($_GET['updateactive'])) {
+	$s_id = $_GET['updateactive'];
+	$s_active = $_GET['s_active'];
+
+	$query = "UPDATE sys SET s_active=? WHERE s_id=?";
+	$stmt = $conn->prepare($query);
+	$stmt->bind_param("ii", $s_active, $s_id);
+	$stmt->execute();
+
+	echo "<script>
+				$(document).ready(function() {
+					Swal.fire({
+						position: 'center',
+						icon: 'success',
+						title: 'ປ່ຽນ​ສະ​ຖາ​ນະ​ລະ​ບົບສ​ຳ​ເລັດ',
+						showConfirmButton: false,
+						timer: 3000
+					  });
+				});
+			</script>";
+
+	$stmt->close();
+	$conn->close();
+
+	header("refresh:3; url=home");
+}
 ob_end_flush();

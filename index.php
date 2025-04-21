@@ -1,3 +1,11 @@
+<?php
+include 'config.php';
+
+$sql11 = "SELECT * FROM sys WHERE s_id = 1";
+$result11 = $conn->query($sql11);
+$row11 = $result11->fetch_assoc();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -43,42 +51,57 @@
                                 </div>
                             </div>
 
-                            <div class="card mb-3">
+                            <?php if ($row11['s_active'] == 1) { ?>
 
-                                <div class="card-body">
+                                <div class="card mb-3">
 
-                                    <div class="pt-3 pb-4">
-                                        <h5 class="card-title text-center pb-0 fs-3"><b>ເຂົ້າລະບົບ</b></h5>
+                                    <div class="card-body">
+
+                                        <div class="pt-3 pb-4">
+                                            <h5 class="card-title text-center pb-0 fs-3"><b>ເຂົ້າລະບົບ</b></h5>
+
+                                        </div>
+
+                                        <form action="member/checklogin" method="POST" class="row g-3 needs-validation"
+                                            novalidate>
+
+                                            <div class="col-12">
+                                                <label for="m_username" class="form-label">ຊື່ເຂົ້າລະບົບ</label>
+                                                <div class="input-group has-validation">
+
+                                                    <input type="text" name="m_username" class="form-control" required>
+                                                    <div class="invalid-feedback">ກະລຸນາໃສ່ຊື່ເຂົ້າລະບົບ</div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12 mb-3">
+                                                <label for="m_password" class="form-label">ລະຫັດ</label>
+                                                <input type="text" name="m_password" class="form-control" required>
+                                                <div class="invalid-feedback">ກະລຸນາໃສ່ລະຫັດ</div>
+                                            </div>
+
+
+                                            <div class="col-12 pb-4">
+                                                <button class="btn btn-primary w-100" type="submit">ເຂົ້າລະບົບ</button>
+                                            </div>
+
+                                        </form>
 
                                     </div>
-
-                                    <form action="member/checklogin" method="POST" class="row g-3 needs-validation"
-                                        novalidate>
-
-                                        <div class="col-12">
-                                            <label for="m_username" class="form-label">ຊື່ເຂົ້າລະບົບ</label>
-                                            <div class="input-group has-validation">
-
-                                                <input type="text" name="m_username" class="form-control" required>
-                                                <div class="invalid-feedback">ກະລຸນາໃສ່ຊື່ເຂົ້າລະບົບ</div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12 mb-3">
-                                            <label for="m_password" class="form-label">ລະຫັດ</label>
-                                            <input type="text" name="m_password" class="form-control" required>
-                                            <div class="invalid-feedback">ກະລຸນາໃສ່ລະຫັດ</div>
-                                        </div>
-
-
-                                        <div class="col-12 pb-4">
-                                            <button class="btn btn-primary w-100" type="submit">ເຂົ້າລະບົບ</button>
-                                        </div>
-
-                                    </form>
-
                                 </div>
-                            </div>
+
+                            <?php } else { ?>
+
+                                <div class="card text-center shadow-sm p-4 mt-4">
+                                    <div class="card-body">
+                                        <h3 class="card-title text-danger">
+                                            <i class="bi bi-exclamation-triangle-fill me-2"></i>ລະ​ບົບ​ໄດ້​ຖຶກ​ປິດ​ການ​ໃຊ້​ງານ​ແລ້ວ
+                                        </h3>
+                                        <p class="text-muted mt-2">ກະລຸນາຕິດຕໍ່ຜູ້ຮັບຜິດຊອບເພື່ອຮັບຊາບຂໍ້ມູນເພີ່ມເຕີມ</p>
+                                    </div>
+                                </div>
+
+                            <?php } ?>
 
 
 
